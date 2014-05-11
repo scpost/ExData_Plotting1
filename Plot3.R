@@ -1,0 +1,65 @@
+## Create plot of energy usage in different 
+## areas of the home (sub metering) vs. date/time
+## using filterd data from download:
+## https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
+
+## Download date: 5/10/2014
+## Text file:"household_power_consumption.txt"
+## Filtered data: Two days worth of data collected from
+## 1/2/2007 00:00:00 to  2/2/2007 23:59:00 (dd:mm:yyyy)
+
+## skip row calculations:
+## 1 row/min generated from start of file
+## 16/12/2006 17:24:00 to 31/1/2007 23:59:00
+
+## nrows = 2*24*60
+
+
+hpcData <- read.table(file = "household_power_consumption.txt", 
+                  sep = ";", 
+                  skip = 66637,
+                  nrows = 2880)
+
+
+## following code restores column headers stripped away
+## by skip attribute to read.table()
+
+cols<-(colnames(read.table("household_power_consumption.txt",
+                   nrow = 1,           #first row contains header names   
+                   header = TRUE, 
+                   sep=";")))
+
+names(hpcData) <- cols                 #replaces R-generated col names (V1,..)
+                                       # with those from colnames() 
+
+
+## merge date and time columns to produce 
+## plot of Global_active_power vs. date/time
+
+x <-paste(hpcData$Date, hpcData$Time)
+DateTime<- strptime(x, "%d/%m/%Y %H:%M:%S")
+
+## Set up plot with first of three metered areas 
+
+plot(DateTime, hpcData$Sub_metering_1, 
+	type= "l",
+      ylab = "Energy sub metering",
+      xlab = "")
+
+## add plots for additional metered areas
+
+lines(DateTime, hpcData$Sub_metering_2, col ="red")  
+lines(DateTime, hpcData$Sub_metering_3, col ="blue")
+
+## add legend to plot
+
+legend("topright", lwd = 1,
+     col = c("black", "red", "blue"),
+     legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
+     )
+
+## save plot to PNG file
+
+dev.copy(png, file ="Plot3.png")
+dev.off()
+
