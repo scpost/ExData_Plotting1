@@ -44,7 +44,8 @@ par(mfrow = c(2,2))   # set up 2 x 2 panel for 4 plots
 ## PANEL 1  Global active power vs. date/time
 
 plot(DateTime, hpcData$Global_active_power,
-      type="l",                                 
+      type="l",   
+      xlab = "",
       ylab = "Global Active Power"
      )
 
