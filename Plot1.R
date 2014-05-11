@@ -1,4 +1,4 @@
-## Creates filterd dataset from download:
+## Create filterd dataset from download:
 ## https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip
 
 ## Download date: 5/10/2014

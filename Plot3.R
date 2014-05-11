@@ -46,7 +46,7 @@ plot(DateTime, hpcData$Sub_metering_1,
       ylab = "Energy sub metering",
       xlab = "")
 
-## add plots for additional metered areas
+## add plot lines for additional metered areas
 
 lines(DateTime, hpcData$Sub_metering_2, col ="red")  
 lines(DateTime, hpcData$Sub_metering_3, col ="blue")
