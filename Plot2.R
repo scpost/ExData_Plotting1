@@ -39,7 +39,8 @@ x <-paste(hpcData$Date, hpcData$Time)
 DateTime<- strptime(x, "%d/%m/%Y %H:%M:%S")
 
 plot(DateTime, hpcData$Global_active_power,
-      type="l",                                 
+      type="l",  
+      xlab = "",
       ylab = "Global Active Power (kilowatts)"
      )
 
